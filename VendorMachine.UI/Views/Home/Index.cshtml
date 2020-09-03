@@ -1,0 +1,78 @@
+﻿@model HomeViewModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Vendor Machine</h1>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    if (Model.Message.StartsWith("Info"))
+    {
+        <div class="alert alert-info">
+            @Model.Message
+        </div>
+    }
+    if (Model.Message.StartsWith("Error"))
+    {
+        <div class="alert alert-danger">
+            @Model.Message
+        </div>
+    }
+}
+
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Available Portions</th>
+            <th></th>
+        </tr>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.AvailablePortion</td>
+                <td>
+                    <form asp-controller="Home" asp-action="Purchase" asp-route-id="@product.Id">
+                        <button type="submit" class="btn btn-primary">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <form class="d-inline" asp-controller="Home" asp-action="AddCredit" asp-route-amount="1.00">
+            <button type="submit" class="btn btn-primary">1 Euro</button>
+        </form>
+        <form class="d-inline" asp-controller="Home" asp-action="AddCredit" asp-route-amount="0.50">
+            <button type="submit" class="btn btn-warning">50 Cent</button>
+        </form>
+        <form class="d-inline" asp-controller="Home" asp-action="AddCredit" asp-route-amount="0.20">
+            <button type="submit" class="btn btn-success">20 Cent</button>
+        </form>
+        <form class="d-inline" asp-controller="Home" asp-action="AddCredit" asp-route-amount="0.10">
+            <button type="submit" class="btn btn-secondary">10 Cent</button>
+        </form>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-4">
+        <form asp-controller="Home" asp-action="Cancel">
+            <button type="submit" class="btn btn-danger">Cancel The Operation</button>
+        </form>
+    </div>
+</div>
+<div class="row" style="margin-top: 30px;">
+    <div class="col-12">
+        <p class="h3">Your Credit: @Model.Credit.Total | Coins: (1 Euro @Model.Credit.OneEuroCount) (0.50 Cent @Model.Credit.FiftyCentCount) (0.20 Cent @Model.Credit.TwentyCentCount) (0.10 Cent @Model.Credit.TenCentCount)</p>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VendorMachine.Entity\VendorMachine.Entity.csproj" />
+    <ProjectReference Include="..\VendorMachine.Repository\VendorMachine.Repository.csproj" />
+    <ProjectReference Include="..\VendorMachine.Service\VendorMachine.Service.csproj" />
+  </ItemGroup>
+
+</Project>
