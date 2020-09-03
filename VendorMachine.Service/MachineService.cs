@@ -53,8 +53,6 @@ namespace VendorMachine.Service
 
         public Money Purchase(Product product)
         {
-            ValidatePurchase(product);
-
             Machine.MachineMoney += Machine.CreditMoney;
 
             var returnMoney = ProcessReturnMoney(product);
